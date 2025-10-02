@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Document</title>
+    
 </head>
+
 <body>
 
+    <!-- start of form -->
     <form>
         <p>
-            username: 
-            <input type="text" name="username" size="40" maxlength="5" placeholder="enter your username"/>
+            username:
+            <input required type="text" name="username" size="40" maxlength="5" placeholder="enter your username" />
         </p>
 
         <p>
-            password: 
-            <input type="password" name="password" size="40" maxlength="5" placeholder="enter your password"/>
+            password:
+            <input required type="password" name="password" size="40" maxlength="5" placeholder="enter your password" />
         </p>
         <p>
             age:
-            <input type="number" >
+            <input type="number">
         </p>
 
         <p>
@@ -29,19 +33,20 @@
 
         <p>
             gender:<br>
-            male
-            <input checked type="radio" value="male" name="gender">
-            
-            female
-            <input type="radio" value="female" name="gender">
-        </p>
+            <label for="male-btn">
+                male
+            </label>
+            <input id="male-btn" checked type="radio" value="male" name="gender">
 
+            <label for="female-btn">female</label>
+            <input id="female-btn" type="radio" value="female" name="gender">
+        </p>
 
         <p>
             skills:
             <br>
-            <input checked type="checkbox" name="skills" value="javascript">
-            javascript
+            <input id="js" checked type="checkbox" name="skills" value="javascript">
+            <label for="js">javascript</label>
             <input type="checkbox" name="skills" value="pyhton">
             pyhton
             <input type="checkbox" name="skills" value="html">
@@ -50,8 +55,53 @@
             css
         </p>
 
-        <button>submit</button>
+        <p>select city
+            <select multiple name="city">
+                <option value="">select your city</option>
+                <option selected value="karachi">karachi</option>
+                <option value="lahore">lahore</option>
+                <option value="islamabad">islamabad</option>
+            </select>
+        </p>
+
+        <p>
+            <input type="file" name="file">
+        </p>
+
+        <fieldset>
+            <legend>Contact details</legend>
+            <label>Email:<br />
+                <input type="text" name="email" /></label><br />
+            <label>Mobile:<br />
+                <input type="text" name="mobile" /></label><br />
+            <label>Telephone:<br />
+                <input type="text" name="telephone" /></label>
+        </fieldset>
+
+
+        <p>
+            <input type="date" name="" id="">
+        </p>
+
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, cupiditate saepe quasi natus similique
+                porro corporis nisi rerum explicabo architecto officiis sequi autem ut, quaerat ratione quam impedit?
+                Officiis, enim.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, cupiditate saepe quasi natus similique
+                porro corporis nisi rerum explicabo architecto officiis sequi autem ut, quaerat ratione quam impedit?
+                Officiis, enim.</p>
+        </div>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LzMnsfqjzkA?si=kF0BeIbfurPeUkZZ"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- <input type="image" src=""> -->
+        <input type="submit" value="login">
     </form>
-    
+
+
+    <video src=""></video>
 </body>
+
 </html>
