@@ -1,0 +1,53 @@
+  
+  /* *{
+    color: red;
+  } */
+  
+  h1{
+    color: red;
+  }
+  #p1{
+     color: red;
+     
+ }
+
+
+ .blue-h {
+     color: blue;
+ }
+
+ .b-text{
+    font-weight: bold;
+ }
+#h-green{
+
+    font-style: normal !important;
+}
+
+ p,h2{
+    /* border: 1px solid black; */
+}
+
+#border-box{
+    border: 1px solid black;
+
+}
+
+p.underline{
+    text-decoration: underline;
+}
+
+#h-green{
+    color: rgb(0, 255, 0);
+    font-style: italic !important;
+}
+
+h1{
+    color: rgb(13, 0, 255);
+  }
+
+
+
+
+
+
