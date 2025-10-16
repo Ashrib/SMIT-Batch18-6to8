@@ -1,0 +1,94 @@
+.b-text{
+    font-weight: 900;
+    font-style: italic;
+}
+.h-transform{
+    text-transform: capitalize;
+}
+.h-dec{
+    text-decoration: overline;
+}
+.p2{
+    line-height: 40px;
+    letter-spacing: 5px;
+    word-spacing: 10px;
+}
+
+.p3{
+    text-align: justify;
+}
+
+.p4 > span{
+    vertical-align: top;
+
+}
+
+/* child selector */
+li > a{
+    color: red;
+}
+
+
+div span{
+    text-decoration: underline;
+}
+h1 + p{
+    font-style: italic;
+}
+
+h1 ~ p{
+    color: blue;
+}
+
+
+.h-img{
+    background-image: url("./images-removebg-preview.png") ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    
+    /* height: 200px;
+    width:  200px; */
+}
+
+
+h1:hover{
+    text-shadow: -5px 8px 10px black;
+}
+
+
+.h1:first-letter{
+    color: red;
+}
+
+
+.p6::first-line{
+    color: red;
+}
+
+
+.style_link a:link{
+        color: rgb(111, 255, 0);
+}
+
+
+.style_link a:hover{
+    color: rgb(4, 251, 255);
+}
+
+.style_link a:active{
+    color: rgb(255, 205, 4);
+}
+
+.style_link a:visited{
+        color: rgb(255, 48, 245);
+}
+
+input:active{
+    padding: 15px;
+}
+
+input:focus{
+    outline: 2px solid red;
+}
