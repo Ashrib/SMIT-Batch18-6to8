@@ -5,3 +5,87 @@
     min-width: 120px ;
     max-width: 300px ;
 }
+
+
+.div2{
+    height: 100px;
+    width: 200px;
+    background-color: burlywood;
+    overflow: scroll;
+
+}
+
+.div3{
+    width: 200px;
+    height: 200px;
+    background-color: gray;
+    /* border-width: 12px 2px 12px 4px;
+     border-top-width: 10px;
+    border-style: solid dashed dotted double;
+    border-color: blue red yellow green; */
+    border: 3px solid red;
+    border-width: 10px 5px;
+}
+
+
+
+
+.heading-div{
+    overflow-x: scroll ;
+    width: 30px;
+    background-color: rgb(168, 145, 115);
+}
+
+.p-d{
+    border: 1px solid rgb(0, 0, 0);
+    padding: 5px 20px ;
+    /* padding-left: ;
+    padding-bottom: ;
+    padding-top: ;
+    padding-right: ; */
+
+    text-align: justify;
+}
+
+.parent{
+    background-color: aqua;
+    padding: 5px;
+}
+
+.child{
+    height: 100px;
+    width: 100px;
+    background-color: bisque;
+    /* margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px; */
+    margin: 20px;
+}
+.child2{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(255, 172, 71);
+}
+
+.child3{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(188, 103, 0);
+}
+
+
+.div-mg{
+    margin: 20px;
+    display: inline-block;
+}
+
+.parent> span{
+    display: block;
+}
+
+.child3{
+    display: none;
+}
+
+
