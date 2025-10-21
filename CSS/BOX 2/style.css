@@ -1,0 +1,45 @@
+.div1,
+.div2,
+.div3 ,
+.div4{
+    height: 350px;
+    width: 350px;
+}
+
+
+.div1 {
+    border: 2px solid black;
+    /* display: none; */
+    visibility: hidden;
+
+}
+
+.div2 {
+    margin-top: 10px;
+    background-color: rgb(148, 120, 86);
+}
+
+
+h2,
+p {
+    border: 2px solid black;
+}
+.div3 {
+    padding: 3px;
+    border-width: 5px;
+    /* -webkit-border-image: url('./29576a7e0442960346703d3ecd6bac04-picture-doodle-icon.png') 30 stretch; */
+    /* -moz-border-image: url("./29576a7e0442960346703d3ecd6bac04-picture-doodle-icon.png") 11 11 11 11 round; */
+    /* border-image: url("./29576a7e0442960346703d3ecd6bac04-picture-doodle-icon.png") 30 round; */
+    -webkit-border-image:  url('./Untitled-1-01.jpg') 2 2 2 2 round;
+}
+
+.div4{
+    margin-top: 10px;
+    border-radius: 20% 10% 50% 30% ;
+}
+
+
+.div4:hover{
+    box-shadow:  15px -8px 10px 15px rgb(255, 7, 7);
+
+}

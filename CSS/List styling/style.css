@@ -1,0 +1,16 @@
+
+ol{
+    list-style-type: lower-alpha;
+}
+ul{
+    /* list-style-type: square; */
+    list-style-image: url(./images-removebg-preview.png);
+}
+
+span{
+    border: 1px solid black;
+}
+span:hover{
+    font-size: 32px;
+    padding: 5px;
+}
