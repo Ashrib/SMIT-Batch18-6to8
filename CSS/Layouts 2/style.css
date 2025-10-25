@@ -1,0 +1,107 @@
+@import url(./navbar.css);
+@import url(./navbar.css);
+@import url(./navbar.css);
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.box{
+    height: 150px;
+    width: 150px;
+    border: 1px solid black;
+}
+
+.div1{
+    margin-top: 100px;
+}
+.div2{
+    position: absolute;
+    right: 30px;
+    top: 100px;
+    background-color: blueviolet;
+    z-index: 1;
+}
+.div3{
+    width: 200px;
+}
+ul{
+    list-style-type: circle;
+}
+
+ul > li {
+    display: inline-block;
+    border-bottom: 2px solid rgba(255, 0, 0, 0.471);
+    padding: 0 10px;
+    /* margin-left: 50px; */
+}
+
+ul > li:hover {
+    border-bottom: 2px solid red;
+}
+
+nav{
+    margin-top: 50px;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: rgb(0, 255, 255);
+    position: sticky;
+    top: 20px;
+    width: 100%;
+    z-index: 100;
+}
+
+ul{
+    text-align: center;
+}
+
+.parent{
+    background-color: bisque;
+    position: relative;
+    padding: 20px;
+    width: 80%;
+}
+
+.child{
+    height: 100px;
+    width: 100px;
+}
+.child-1{
+    background-color: blue;
+}
+
+.child-2{
+    background-color: rgb(106, 255, 0);
+    position: absolute;
+    top: 2px;
+    right: 0px;
+
+}
+
+.div3{
+    position: relative;
+}
+
+.circle{
+    height: 70px;
+    width: 70px;
+    background-color: red;
+    border-radius: 50%;
+    position: fixed;
+    top:150px;
+    right: 60px;
+    text-align: center;
+    line-height: 70px;
+    z-index: 99;
+}
+
+nav>div{
+    text-align: right;
+    background-color: rgb(100, 230, 230);
+}
+
+
+
