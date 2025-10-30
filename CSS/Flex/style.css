@@ -7,5 +7,61 @@
 .parent{
     background-color: aqua;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
+
+
+.container{
+    margin: 50px 0;
+    background-color: bisque;
+    display: flex;
+    flex-wrap: wrap;
+    height: 300px;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.box{
+    /* height: 170px; */
+    width: 100px;
+    border: 1px solid black;
+}
+
+.box2{
+    font-size: 32px;
+}
+
+.box3{
+    font-size: 12px;
+}
+.box4{
+    font-size: 62px;
+}
+
+.card{
+    height:300px;
+    width: 200px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aquamarine;
+    margin-top: 20px;
+}
+
+.card > img{
+    width: 100%;
+    height: 100px;
+    background-color: red;
+}
+.cards-box{
+    background-color: burlywood;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+
+
