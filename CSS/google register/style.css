@@ -1,0 +1,110 @@
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+.container{
+    background-color: beige;
+    width: 100vw;
+    height: 100vh;
+    /* overflow-y: scroll; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parent{
+    width: 70%;
+    /* height: 450px; */
+    
+}
+
+.white-box{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    height: 80%;
+    width: 100%;
+    
+}
+
+.content-box{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 50px;
+    padding-bottom: 150px;
+}
+
+.title{
+    font-size: 2em;
+}
+
+.input-box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 20px;
+    padding-bottom: 50px;
+    width: 50%;
+    
+}
+
+.input-box > input {
+    width: 70%;
+    background-color: transparent;
+    padding: 3%;
+}
+
+.input-box > button{
+    width: 100px;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.links-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.right{
+    display: flex;
+    gap: 15px;
+
+}
+
+
+
+
+
+
+@media screen and (max-width:768px) {
+    .white-box{
+        flex-direction: column;
+    }
+    .input-box{
+        width: 100%;
+    }
+    .content-box{
+        padding-bottom: 50px;
+        width: 100%;
+    }
+    .input-box > input{
+        width:94%;
+        
+        /* flex-grow: 1; */
+    }
+}
+
+
+@media screen and (max-width:425px) {
+    .white-box{
+        background-color: red;
+    }
+}
