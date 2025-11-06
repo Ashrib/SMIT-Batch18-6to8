@@ -1,0 +1,64 @@
+nav{
+    background-color: blanchedalmond;
+    display: flex;
+    padding: 15px;
+}
+
+
+
+.logo{
+    background-color: rgb(164, 255, 255);
+    width: 20%;
+}
+ul{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly !important;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.list{
+    width: 60%;
+    background-color: rgb(255, 182, 87);
+}
+
+/* .menu{
+   display: none;
+} */
+
+.li-icons{
+    /* display: none !important; */
+}
+
+li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    
+    /* .menu{
+        display: block;
+    } */
+    /* ul{
+        display: none;
+    } */
+    .list{
+        width: 80%;
+        display: flex;
+        /* justify-content: right; */
+    }
+
+    .li-icons{
+        display: block  !important;
+    }
+    .li-text{
+        display: none;
+    }
+}
