@@ -1,0 +1,45 @@
+
+/* css variable */
+:root{   
+    /* global variables */
+    --boxBgColor:  rgba(255, 108, 108, 0.764);
+    --btnPadding: 5px 10px;
+}
+
+body{
+    background-color: #3C40C6;
+}
+
+/* card styling */
+.card{
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    background-color: var(--boxBgColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.card button{
+    padding: var(--btnPadding);
+    background-color: rgb(1, 158, 255);
+    
+}
+
+.box{
+    border: 1px solid black;
+    height: 200px;
+    width: 200px;
+    background-color: var(--boxBgColor);
+}
+
+.card span{
+    /* 15 * 2 = 30px */
+    font-size: 2em; 
+    padding: 0.5em;
+    border: 1px solid white;
+}
