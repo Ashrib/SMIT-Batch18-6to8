@@ -1,0 +1,44 @@
+
+.scale-box, .tanslate-box,.rotate-box{
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+}
+
+.tanslate-box{
+    transition: infinite 3s;
+    transform: translate(500px,300px);
+}
+
+.tanslate-box:hover{
+    /* transform: matrix(2, 0 , 0.5, 2, 300, 100); */
+}
+
+.rotate-box{
+    /* transform: scale(2,3); */
+    transition: linear 1s;
+}
+
+.rotate-box:hover{
+    transform: rotate(360deg);
+}
+
+.scale-box{
+    margin-left: 50px;
+    transition: ease-in 1s;
+    transform: skewX(45deg);
+}
+.scale-box:hover{
+    transform: scale(1.5,2);
+}
+
+button{
+    transition: linear 0.5s;
+}
+button:hover{
+    /* transform: scaleY(1.5); */
+    padding: 5px 10px;
+    font-size: 1.5em;
+}
+
+
