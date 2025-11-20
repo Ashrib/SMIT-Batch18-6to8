@@ -1,0 +1,15 @@
+.container-fluid{
+    background-color: rgb(255, 177, 82);
+    height: 100vh;
+    padding: 0;
+}
+
+.container-lg{
+    height: 100%;
+    background-color: rgb(255, 94, 94);
+}
+.box{
+    width: 200px;
+    /* border: 1px solid black; */
+    height: 150px;
+}
