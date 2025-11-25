@@ -1,0 +1,44 @@
+.container {
+    background-color: aqua;
+    height: 200px;
+}
+
+.container2{
+    background-color: rgb(154, 255, 114);
+    margin-top: 20px;
+}
+.container_f{
+    background-color: rgb(255, 162, 111);
+    margin: 50px 0;
+    padding: 15px;
+}
+.br{
+    border: 1px solid black;
+}
+
+.card{
+    height: 200px;
+}
+
+nav{
+    background-color: rgba(149, 255, 255, 0.706);
+    height: 80px;
+    margin-bottom: 50px;
+}
+.logo{
+    background-color: rgb(255, 255, 150);
+}
+
+.ul{
+    background-color: rgb(255, 195, 150);
+}
+
+input{
+    width: 100%;
+}
+
+.con-3{
+    background-color: cadetblue;
+    margin: 50px 0;
+    height: 100px;
+}
