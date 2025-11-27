@@ -23,6 +23,5 @@ alert(b);
 b = "text changed";
 alert(b);
 
-
 b = "abcd";
 
