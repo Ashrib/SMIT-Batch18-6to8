@@ -9,8 +9,8 @@
 
 
 // course enrollment of 25 age
-// var ageInput = prompt("enter your age");
-// console.log(ageInput);
+var ageInput = prompt("enter your age");
+console.log(ageInput);
 
 
 if(ageInput == 29){ 
