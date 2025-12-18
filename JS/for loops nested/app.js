@@ -3,7 +3,6 @@
 // var firstNames = ['ali','usman','umar', 'adil','noman']; 
 // var lastNames = ['khan','ali','raza', 'rao','khan']; 
 
-
 var numbers = [34, 5, 8, 26, 78, 23]; // i
 var toMultipleNums = [50, 20, 40];
 
