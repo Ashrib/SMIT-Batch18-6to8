@@ -27,13 +27,42 @@ var toMultipleNums = [50, 20, 40];
 //     }
 // }
 
-for (var i = 1; i < 6; i++) { // 5
-    console.log() //5
+// for (var i = 1; i < 6; i++) { // 5
+//     console.log() //5
     
-    for (var j = 1; j < 9; j++) { // 8
-        console.log(i) //5 * 8
-    }
+//     for (var j = 1; j < 9; j++) { // 8
+//         console.log(i) //5 * 8
+//     }
 
-    console.log() //5
+//     console.log() //5
+// }
+
+
+
+
+
+var nums = [];
+
+var userInp = +prompt("how many number do you want to enter?");
+
+for(var i = 1; i<=userInp; i++){
+    var inputNum = +prompt('enter number ' + i);
+    nums.push(inputNum);
 }
+
+/// 6,78,3,54
+for(var i=0; i<nums.length; i++){
+    // i = 0 , nums[i] = 6
+    for(var j=i+1; j<nums.length; j++){
+         // j = 1 , nums[j] = 78
+         if(nums[i] > nums[j]){
+            var temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+         }
+    }
+}
+
+console.log(nums)
+
 
