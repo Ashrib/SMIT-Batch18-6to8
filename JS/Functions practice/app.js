@@ -29,6 +29,7 @@ function checkAmount() {
     showResultElm.innerText = "current amount: " + initialAmount;
 }
 
+
 // here is the logic to deposit the amount
 function depositAmount() {
     var amountInpValue = Number(amountInpElm.value);
