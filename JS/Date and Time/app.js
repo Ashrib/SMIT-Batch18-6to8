@@ -82,7 +82,6 @@ function getCurrentTime(){
         secSpan.innerText = currentTime.getSeconds();
     }
 
-
 }
 
 
