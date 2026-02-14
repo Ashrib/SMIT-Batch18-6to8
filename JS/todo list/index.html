@@ -15,6 +15,9 @@
             display: flex;
             flex-direction: column-reverse;
         }
+        #update_btn{
+            display: none;
+        }
     </style>
     
     <script defer src="./app.js"></script>
@@ -23,7 +26,8 @@
     
     <div>
         <input type="text" id="todo-input">
-        <button onClick="addTodo()">add</button>
+        <button id="add_btn" onClick="addTodo()">add</button>
+        <button id="update_btn" onClick="updateTodo()">update</button>
     </div>
 
 
