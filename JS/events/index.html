@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+
+    <script defer src="./app.js"></script>
+    <style>
+        .input-box{
+            display: flex;
+            flex-direction: column;
+        }
+        .error-text{
+            color: red;
+            font-size: 0.5em;
+            display: none;
+        }
+        .box{
+            height: 200px;
+            width: 200px;
+            /* background-color: blue; */
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="input-box">
+        <input type="email" placeholder="enter email" name="" id="" onBlur="inputBlur(event)"
+            onFocus="inputFocus(event)">
+        <span class="error-text" id="email-error">enter a valid email</span>
+    </div>
+
+
+    <!-- <input type="text" placeholder="enter username"  > -->
+
+
+
+    <div class="box" id="box" 
+    onMouseOver="onBoxOver(event)"
+    onMouseOut="onBoxOut(event)"
+    style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEbxGgmUGIvztvt2ySh0kFon3jc7OVe-QZ5Q&s');"
+    ></div>
+
+
+
+
+</body>
+
+</html>
