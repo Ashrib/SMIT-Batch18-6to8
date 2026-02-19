@@ -38,3 +38,30 @@ function onBoxOver(e){
 function onBoxOut(e){
     e.target.style.backgroundImage = `url('${images[1]}')`
 }
+
+
+function loginSubmit(e){
+    /// to prevent the refresh
+    e.preventDefault();
+    console.log(e.target) /// a complete form element
+    var emailInpValue = e.target[0].value;
+    var passInpValue = e.target[1].value;
+    var radioInputs = document.getElementsByName('nic'); /// get all radio inputs
+
+    // var noChecked = false;
+    //     for (let i = 0; i < radioInputs.length; i++) {
+    //       if(radioInputs[i].checked==true){
+    //           noChecked = true;
+    //       }
+    //     }
+    if(radioInputs[0].checked === false && radioInputs[1].checked === false){
+        alert('please checked any of radio options!');
+        return
+    }
+    if(passInpValue.length < 8){
+        alert('min 8 chars reqiured!');
+        return;
+    }
+
+    /// form submit
+}
