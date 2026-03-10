@@ -59,13 +59,29 @@
             background-color: bisque;
             height: 100%;
         }
+
+        .head{
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+        }
+        .head > div{
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            padding: 10px;
+        }
+        .active-tab{
+            border-bottom: 2px solid rgb(0, 187, 255);
+        }
+
     </style>
     <script defer src="./app.js"></script>
 </head>
 
 <body>
 
-    <div class="container">
+    <!-- <div class="container">
         <div id="modal">
 
             <div id="content">
@@ -82,8 +98,17 @@
 
 
         </div>
-    </div>
+    </div> -->
 
+
+
+
+
+    <div class="head">
+        <div class="tab home active-tab">home</div>
+        <div class="tab settings">settings</div>
+        <div class="tab about">about</div>
+    </div>
 
 </body>
 
