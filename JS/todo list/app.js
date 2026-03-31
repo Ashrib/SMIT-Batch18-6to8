@@ -5,6 +5,21 @@ var indexToBeUpdate = null;
 var updateBtn = document.getElementById('update_btn');
 var addBtn = document.getElementById('add_btn');
 
+function getLocalStorageData(){   /// get data from local storage
+    var getTodosData = window.localStorage.getItem('todos');
+    getTodosData = JSON.parse(getTodosData);
+    console.log(getTodosData);
+    if(getTodosData !== null){
+        todos = getTodosData;
+    }
+    renderTodos()
+
+    ///
+
+}
+getLocalStorageData();
+
+console.log("todos => ",todos)
 
 function doneTodo(id) {
     for (var i = 0; i < todos.length; i++) {
@@ -16,6 +31,7 @@ function doneTodo(id) {
     console.log(todos)
     renderTodos()
 }
+
 function deleteTodo(id) {
     console.log(id);
 
@@ -25,6 +41,7 @@ function deleteTodo(id) {
         if (todos[i].id == id) {
             // console.log('found at index: '+ i);
             todos.splice(i, 1);  // this updates the array (remove the specific object of todo)
+            window.localStorage.setItem("todos", JSON.stringify(todos))
             renderTodos(); // re-render the updated array
         }
     }
@@ -54,8 +71,8 @@ function updateTodo() {
     var todoInput = document.getElementById('todo-input');
     console.log(todoInput.value)
 
-
     todos[indexToBeUpdate].text = todoInput.value;
+    window.localStorage.setItem("todos", JSON.stringify(todos))
 
     // OR
 
@@ -87,6 +104,11 @@ function addTodo() {
     }
     todos.push(todoObj);
 
+
+    /// to store in local storage
+    var stringData = JSON.stringify(todos)
+    window.localStorage.setItem('todos', stringData)
+
     todoInput.value = '';
     renderTodos();
     console.log(todos)
@@ -99,6 +121,8 @@ function addTodo() {
 // D - delete
 
 function renderTodos() {
+console.log("todos => ",todos)
+
     todoParentElm.innerHTML = '';
     for (var i = 0; i < todos.length; i++) {
         // var pElm = document.createElement('p');
@@ -125,4 +149,11 @@ function renderTodos() {
 
 
     }
+}
+
+// delete all
+function deleteAll(){  
+    todos = [];
+    window.localStorage.removeItem('todos'); /// remove todos from local storage
+    renderTodos()
 }
