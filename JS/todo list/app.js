@@ -155,5 +155,5 @@ console.log("todos => ",todos)
 function deleteAll(){  
     todos = [];
     window.localStorage.removeItem('todos'); /// remove todos from local storage
-    renderTodos()
+    renderTodos();
 }
