@@ -1,5 +1,4 @@
 
-
 // function showAlert() {
 //     try {
 //         var name = 'abc';
@@ -15,23 +14,36 @@
 
 // showAlert()
 
-async function getUsers(){
-    try{
-        var users = await fetch('https://jsonplaceholder.typicode.com/users');
-        console.log(users);
-    }
-    catch(error){
-        console.log('error while fetching users!')
-        console.log(error)
-    }
-}
 
-getUsers()
-
-console.log(true)
+// console.log(true)
 
 
 // API  -> Application Programming Interface
+
+
+
+
+
+try{
+    var userInput = prompt('enter your name');
+
+    if(userInput.length < 3){
+        throw 'invalid username'  // error throw
+    }
+
+     if(email.length < 3){
+        throw 'invalid email'  // error throw
+    }
+    
+
+}
+catch(error){
+    console.log(error);
+
+    document.write(error)
+    
+}
+
 
 
 
