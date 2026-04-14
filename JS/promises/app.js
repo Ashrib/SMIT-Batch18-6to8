@@ -2,7 +2,6 @@
 // console.log(response)
 
 
-
 // let promise = new Promise((reslove, reject)=>{
 //     console.log('start to fetch data!');
 
@@ -17,7 +16,6 @@
 
 
 let userFetchPromise = new Promise(async(reslove,reject)=>{
-
     let response = await fetch('https://jsonplaceholder.typicode.com/users/');
     
     // console.log(response.ok)
@@ -27,7 +25,6 @@ let userFetchPromise = new Promise(async(reslove,reject)=>{
     else{
         reject(new Error('error while fetching users!'));
     }
-
 })
 
 
@@ -36,8 +33,7 @@ userFetchPromise.then((data)=>{
     console.log(data);
 }).catch((error)=>{
     console.error(error)
-})
-
+});
 
 
 let newPromise = new Promise((res,rej)=>{
@@ -46,7 +42,6 @@ let newPromise = new Promise((res,rej)=>{
         res(1);
     },1000)
 });
-
 
 
 newPromise.then((num)=>{
