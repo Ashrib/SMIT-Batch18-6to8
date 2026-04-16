@@ -81,8 +81,53 @@ console.log(newUsers)
 
 
 
+let arr1 = [12,345,78];
+let arr2 = [34,78,232];
+
+let newArr = [true,false,...arr1, ...arr2];
+console.log(newArr)
 
 
+
+
+
+let viewDetails = (username,age, ...otherDetails)=>{  /// rest parameter
+
+    console.log(username)
+    console.log(age)
+
+    console.log(otherDetails)
+}
+
+
+viewDetails('abc', 21, 'karachi')
+viewDetails('abc', 21, 'karachi',true)
+viewDetails('abc', 21, 'karachi',[56,768,79878])
+
+
+
+
+
+
+nums.map((num, i, arr)=>{
+    console.log(i);
+    console.log(num);
+    console.log(arr);
+});
+
+
+
+let fetchUsers = async()=>{
+    try {
+          let response = await fetch('api////');
+          console.log(response)
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+fetchUsers()
 
 
 
