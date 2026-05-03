@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+
+    <style>
+        .users-container{
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .user-card{
+            border: 2px solid  black;
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
 
@@ -11,6 +25,8 @@
         <input type="text" name="username" id="user-name" placeholder="enter your username">
         <button id="add-btn">add</button>
     </div>
+
+    <div class="users-container"></div>
     
     <script type="module" src="./app.js"></script>
 </body>
