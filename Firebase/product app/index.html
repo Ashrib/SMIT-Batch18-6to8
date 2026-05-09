@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script defer type="module" src="./app.js"></script>
+
+    <style>
+        .product-card{
+            border: 2px solid black;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+  
+
+    <div class="main">
+
+        <div class="productForm">
+            <div>
+                <input type="text" id="product-name" placeholder="enter product name">
+            </div>
+            
+            <div>
+                <input type="text" id="product-price" placeholder="enter product price">
+            </div>
+
+            
+            <div>
+                <select name="category" id="product-category">
+                    <option value="">select your category</option>
+                    <option value="electronic">electronic</option>
+                    <option value="beauty">beauty</option>
+                    <option value="fragrances">fragrances</option>
+                </select>
+
+            </div>
+
+            <div><button id="add-btn">add</button></div>
+
+
+        </div>
+
+
+        <div id="products-container">
+
+        </div>
+
+
+    </div>
+
+    
+</body>
+</html>
