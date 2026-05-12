@@ -1,0 +1,6 @@
+
+
+function navigateBack(){
+    history.back()
+}
+
