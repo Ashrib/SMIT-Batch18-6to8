@@ -73,7 +73,6 @@ let addProduct = async () => {
 
 
 
-
 let renderProducts = () => {
     productsCont.innerHTML = ''
     products.map((product) => {
@@ -86,6 +85,8 @@ let renderProducts = () => {
     })
 }
 
+
+/// server listen 
 /// products fetch (real-time updates) ----> GET request
 const unsubscribe = onSnapshot(collection(db, "products"), (querySnapshot) => {
     products = []
@@ -98,6 +99,12 @@ const unsubscribe = onSnapshot(collection(db, "products"), (querySnapshot) => {
     console.log("new data =>", products);
 });
 
+
+// console.log(checkPathname.includes('index.html'))
+
+if(!window.location.pathname.includes('index.html')){
+    unsubscribe();  //// detach listener 
+}
 
 
 addBtn.addEventListener('click', () => {
