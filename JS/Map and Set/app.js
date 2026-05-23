@@ -37,3 +37,48 @@ for(let keyName of mapObj.keys()){
     console.log(keyName)
 }
 
+
+
+///////////// ------set---- //////////
+
+console.log('---------Set-----------');
+
+
+
+let usernames = new Set();
+usernames.add('user1');
+usernames.add('user2');
+usernames.add('user2');
+usernames.add(90);
+usernames.add(90);
+usernames.add(true);
+usernames.add(false);
+usernames.add(false);
+usernames.add({name:'a'});
+usernames.add({name:'a'});
+
+usernames.delete('user1')
+
+console.log(usernames)
+console.log(usernames.size);
+
+
+let numbers = [123,5,6,6,5,3,3];
+let uniqueNumbers = new Set(numbers);
+
+let updatedNumbers = [...uniqueNumbers]
+console.log(updatedNumbers);
+
+
+for(let num of uniqueNumbers){
+    console.log(num);
+}
+
+
+var para = 'there is some text.';
+console.log(para.split(' '));
+
+let userEmail = 'abc123@gmail.com';
+
+let arr = ['a','b','c',true];
+console.log(arr.join(','));
