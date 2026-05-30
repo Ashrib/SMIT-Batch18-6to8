@@ -82,7 +82,6 @@ let total = numbers.reduce(
 /// mom
 /// madam
 /// pop
-
     let checkPalindrome = (word) => word.split("").reverse().join("") == word;
 
 
