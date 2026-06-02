@@ -2,33 +2,69 @@ import { collection, db, getDocs, query, where } from './firebaseConfig.js';
 
 let searchBtn  = document.querySelector("#search-btn");
 let searchInp  = document.querySelector("#search-inp");
+let categoryBarDiv  = document.querySelector(".category-bar");
+
+
 let products = [];
+let categories = [];
 
 
-
-let getQueryData = async()=>{
+let fetchCategories = async()=>{
     try {
-        const q = query(  //// design a query (for certain condition)
-            collection(db, "products"), /// collection reference
-            where("name", "==", "product12") /// data condition
-        );
-        
-        const querySnapshot = await getDocs(q); /// pass the query and fetch data
-        querySnapshot.forEach((doc) => {
-        //   console.log(doc.id, " => ", doc.data());
-          products.push({
-            pid: doc.id,
-            ...doc.data()
-          })
-        });
-        console.log('products =>', products)
+        const querySnapshot = await getDocs(collection(db, 'categories') );  /// ==> [{},{}] 
+        querySnapshot.forEach((doc)=>{
+            categories = doc.data().categories;
+            console.log(categories)
+        })
+
+
     } catch (error) {
-        console.error(error);
+        console.error(error)
     }
 }
 
+fetchCategories().then(()=>{
+    categories.map((category)=>{
+        categoryBarDiv.innerHTML += `<button>${category}</button>`
+    })
+})
 
-getQueryData()
+
+
+let searchProducts = async()=>{
+    try {
+    const q = query(
+        collection(db, "products"), 
+        where("category", "==", searchInp.value )
+    );
+
+    const querySnapshot = await getDocs(q); // ==> [] of objects
+
+    console.log(querySnapshot)
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+    } catch (error) {
+        console.error(error)
+    }
+
+}
+
+searchBtn.addEventListener("click", ()=> searchProducts())
 
 
 
+
+
+
+
+
+
+/// get all docs
+// update
+// delete
+/// create addDoc
+
+
+
+/// chat.html
