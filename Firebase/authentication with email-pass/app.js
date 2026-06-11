@@ -1,27 +1,11 @@
-import { auth, createUserWithEmailAndPassword, getAuth, onAuthStateChanged } from "./firebaseConfig.js";
+import { requireAuth } from "./auth-guard.js";
+import { addDoc, auth, collection, createUserWithEmailAndPassword, db, getAuth, onAuthStateChanged } from "./firebaseConfig.js";
 
 let emailInput = document.querySelector("#email-inp");
 let passInput = document.querySelector("#password-inp");
 let registerForm = document.querySelector("#register-form");
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        // ...
-        console.log(user)
-        window.location.replace('./pages/dashboard.html')
-
-    } else {
-        // User is signed out
-        // ...
-        console.log("signed out");
-
-    }
-});
-
-
+requireAuth(); ///  check user exist or not, if exist then navigate to dashboard
 
 let validateForm = ()=>{
     if(emailInput.value.length < 1 || passInput.value.length < 1){
@@ -46,7 +30,19 @@ let createUser = async () => {
                 console.log("success")
                 console.log("userCredential =>", user);
 
-                window.location.replace('./pages/dashboard.html')
+                //// add doc in users collection
+
+                // addDoc(collection(db, 'users'), {
+                //     uid: user?.uid,
+                //     displayName: user?.displayName,
+                //     email: user?.email,
+                //     phoneNumber: user?.phoneNumber
+                // }).then(()=>{
+                //     console.log("user stored in db")
+                //     window.location.replace("./dashboard.html")
+                // })
+
+                
             });
 
     } catch (error) {

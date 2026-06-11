@@ -1,16 +1,15 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
-import { signOut,getAuth,onAuthStateChanged , createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { query, where, onSnapshot, deleteDoc, doc, setDoc, getFirestore,addDoc,collection, getDocs  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { signInWithEmailAndPassword, signOut, getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { query, where, onSnapshot, deleteDoc, doc, setDoc, getFirestore, addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  ///
+ //// ....
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -21,4 +20,4 @@ const db = getFirestore(app);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-export { auth,signOut,getAuth,onAuthStateChanged, createUserWithEmailAndPassword, onSnapshot, doc, setDoc, db, addDoc,collection, getDocs ,deleteDoc, where,query}
+export { auth, signInWithEmailAndPassword, signOut, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, onSnapshot, doc, setDoc, db, addDoc, collection, getDocs, deleteDoc, where, query }
