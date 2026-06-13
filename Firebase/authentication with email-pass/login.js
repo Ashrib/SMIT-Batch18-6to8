@@ -7,17 +7,13 @@ let loginForm = document.querySelector("#login-form");
 
 requireAuth(); /// to check user logged-in or not
 
-
-
 let validateForm = ()=>{
     if(emailInput.value.length < 1 || passInput.value.length < 1){
         console.error(new Error("all fields must be filled!"))
         return false
     }
-
     return true;
 }
-
 
 
 let loginUser = async () => {
@@ -33,6 +29,7 @@ let loginUser = async () => {
                 const user = userCredential.user;
                 console.log("success on login")
                 console.log("userCredential =>", user);
+                window.localStorage.setItem('uid', JSON.stringify(user.uid))
 
                 window.location.replace('./dashboard.html')
             });

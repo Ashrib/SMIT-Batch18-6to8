@@ -5,10 +5,10 @@ let emailInput = document.querySelector("#email-inp");
 let passInput = document.querySelector("#password-inp");
 let registerForm = document.querySelector("#register-form");
 
-requireAuth(); ///  check user exist or not, if exist then navigate to dashboard
+// requireAuth(); ///  check user exist or not, if exist then navigate to dashboard
 
-let validateForm = ()=>{
-    if(emailInput.value.length < 1 || passInput.value.length < 1){
+let validateForm = () => {
+    if (emailInput.value.length < 1 || passInput.value.length < 1) {
         console.error(new Error("all fields must be filled!"))
         return false
     }
@@ -16,9 +16,37 @@ let validateForm = ()=>{
     return true;
 }
 
+
+let addUserInDb = async(user) => {
+    try {
+
+        console.log("user for add func =>", user)
+        // add doc in users collection
+
+        let userData =  {
+            uid: user?.uid,
+            displayName: user?.displayName,
+            email: user?.email,
+            phoneNumber: user?.phoneNumber
+        }
+
+        await addDoc(collection(db, 'users'), userData)
+        .then(() => {
+            console.log("user stored in db");
+            // add uid to localstorage
+            window.localStorage.setItem('uid', JSON.stringify(userData.uid))
+
+        })
+    } catch (error) {
+        console.error(new Error('error in adding user to db!'))
+        console.error(error)
+
+    }
+}
+
 let createUser = async () => {
     try {
-        if(!validateForm()){
+        if (!validateForm()) {
             console.error(new Error('user account can not be created!'))
             return
         }
@@ -30,19 +58,9 @@ let createUser = async () => {
                 console.log("success")
                 console.log("userCredential =>", user);
 
-                //// add doc in users collection
+                addUserInDb(user).then(()=> window.location.replace("./dashboard.html"));
+            // window.location.replace("./dashboard.html")
 
-                // addDoc(collection(db, 'users'), {
-                //     uid: user?.uid,
-                //     displayName: user?.displayName,
-                //     email: user?.email,
-                //     phoneNumber: user?.phoneNumber
-                // }).then(()=>{
-                //     console.log("user stored in db")
-                //     window.location.replace("./dashboard.html")
-                // })
-
-                
             });
 
     } catch (error) {
@@ -51,7 +69,7 @@ let createUser = async () => {
 }
 
 
-registerForm.addEventListener("submit", (e)=>{
+registerForm.addEventListener("submit", (e) => {
     e.preventDefault();
     createUser()
 })
