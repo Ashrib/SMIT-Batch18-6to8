@@ -69,7 +69,6 @@ getUser().then(()=>{
 deleteAccBtn.addEventListener("click", () => deleteUserAccount())
 
 
-
 // sign out
 let userSignOut = async () => {
     await signOut(auth).then(() => {

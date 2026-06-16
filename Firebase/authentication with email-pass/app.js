@@ -51,6 +51,7 @@ let createUser = async () => {
             return
         }
 
+        //// firebase cloud functions
         await createUserWithEmailAndPassword(auth, emailInput.value, passInput.value)
             .then((userCredential) => {
                 // Signed up 
