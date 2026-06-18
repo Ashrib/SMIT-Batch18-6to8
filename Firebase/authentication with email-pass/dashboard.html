@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .post{
+            border: 1px solid black;
+            padding: 20px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -11,6 +18,16 @@
         <button id="deleteAcc-btn">delete account</button>
     </nav>
     <h2>Dashboard</h2>
+
+    <div>
+        <div>
+            <input type="text" placeholder="enter text for post" id="post-inp">
+            <button id="post-btn">post</button>
+        </div>
+        <div class="posts-main">
+
+        </div>
+    </div>
 
     <script type="module" src="./dashboard.js"></script>
 </body>
