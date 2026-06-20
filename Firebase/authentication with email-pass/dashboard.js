@@ -92,13 +92,17 @@ let createPost = async () => {
         }
 
         let newDate = new Date();
-        let docRef = await addDoc(collection(db, "posts"), {  /// post
+        let newPostData = {  /// post
             text: postInp.value,
             uid: userId, /// foreign
             post_id: newDate.getTime(), /// as primary key
-        })
+        }
+        let docRef = await addDoc(collection(db, "posts"), newPostData)
         console.log("post successfully add with doc_id => ", docRef.id);
-
+        posts = [...posts,
+        { ...newPostData, id: docRef.id }
+        ]
+        renderPosts()
     } catch (error) {
         console.error(error)
     }
@@ -111,7 +115,7 @@ let getUserPosts = async () => {
         const queryPost = query(
             collection(db, 'posts'),
             where("uid", "==", userId)
-        )
+        );
 
         let querySnapshot = await getDocs(queryPost);
         querySnapshot.forEach((post) => {
@@ -119,7 +123,7 @@ let getUserPosts = async () => {
                 ...posts,  ///
                 { id: post.id, ...post.data() }
             ]
-        })
+        });
 
         console.log(posts)
     } catch (error) {
@@ -128,15 +132,79 @@ let getUserPosts = async () => {
 }
 
 
+let deletePost = async (id) => {
+    try {
+        console.log("delete post id => ", id)
+        if (!id) {
+            console.log("id not found to delete the post!");
+            return;
+        }
+
+        await deleteDoc(doc(db, 'posts', id)).then(() => {
+            console.log('post deleted successfully.');
+
+            posts = posts.filter((post) => post.id != id); /// []
+            renderPosts()
+        })
+
+
+
+    } catch (error) {
+        console.error(new Error("can not delete the post"));
+        console.error(error);
+
+    }
+
+
+
+}
+
+
+let editPost = async (id) => {
+    try {
+        console.log('editing post id =>', id);
+        let editPostInp = document.getElementById(`${id}`)
+        editPostInp.removeAttribute('disabled')
+        console.log(editPostInp)
+        document.getElementById(`btnBox-${id}`).style.display = 'none'
+
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 let renderPosts = () => {
+    postsMain.innerHTML = ``;
+
+    if (posts.length < 1) { //// no post yet
+        postsMain.innerHTML = `<div class='post'> no posts</div>`
+        return
+    }
+
+
     posts.map((post) => {
-        postsMain.innerHTML += `<div class='post'>
-    ${post?.text}
-    </div>`
+        let postDiv = document.createElement("div");
+        postDiv.className = 'post';
+        postDiv.innerHTML = `
+         <div>
+         <input id='${post?.id}' type='text' value='${post?.text}' disabled/>
+         <button class='update-btn' style='display:none;'>update</button>
+         </div>
+        <div id='btnBox-${post.id}'>  
+            <button class='del-btn'>delete</button>
+            <button class='edit-btn'>edit</button>
+        </div>
+            `
+
+        postDiv.querySelector('.del-btn').addEventListener('click', () => deletePost(post?.id))
+        postDiv.querySelector('.edit-btn').addEventListener('click', () => editPost(post?.id))
+
+        postsMain.appendChild(postDiv)
     })
 }
 
-getUserPosts().then(()=>renderPosts())
+getUserPosts().then(() => renderPosts())
 
 deleteAccBtn.addEventListener("click", () => deleteUserAccount())
 
