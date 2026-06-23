@@ -1,5 +1,5 @@
 import { requireGuest } from "./auth-guard.js";
-import { addDoc, auth, collection, db, deleteDoc, deleteUser, doc, getAuth, getDocs, onAuthStateChanged, query, signOut, where } from "./firebaseConfig.js"
+import { addDoc, auth, collection, db, deleteDoc, deleteUser, doc, getAuth, getDocs, onAuthStateChanged, query, serverTimestamp, signOut, updateDoc, where } from "./firebaseConfig.js"
 
 let postsMain = document.querySelector(".posts-main");
 let signOutBtn = document.querySelector("#signOut-btn");
@@ -160,13 +160,60 @@ let deletePost = async (id) => {
 }
 
 
-let editPost = async (id) => {
+let editPost = (id) => {
     try {
         console.log('editing post id =>', id);
         let editPostInp = document.getElementById(`${id}`)
         editPostInp.removeAttribute('disabled')
-        console.log(editPostInp)
+        console.log(editPostInp.nextSibling.nextSibling)
+        editPostInp.nextSibling.nextSibling.style.display = 'block'
         document.getElementById(`btnBox-${id}`).style.display = 'none'
+
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+let updatePost = async (id) => {
+    try {
+        let editPostInp = document.getElementById(`${id}`)
+        console.log(editPostInp);
+        console.log(editPostInp.value);
+
+        let timeStampData = serverTimestamp();
+
+        // update the post using id
+        await updateDoc(doc(db, 'posts', id), {
+            text: editPostInp.value,
+            timestamp: timeStampData,
+        }).then(() => {
+            console.log("post successfully updated with id =>", id);
+            editPostInp.setAttribute('disabled', 'true')
+            editPostInp.nextSibling.nextSibling.style.display = 'none' /// update
+            document.getElementById(`btnBox-${id}`).style.display = 'block' // del and edit
+            //// find the obj to be updated
+            let dataToUpdate = posts.find((item) => item.id == id);
+            dataToUpdate = {  /// update the obj post, locally
+                ...dataToUpdate,
+                text: editPostInp.value,
+                timestamp: timeStampData,
+            }
+
+            console.log("after update find obj => ", dataToUpdate)
+            console.log('===== post array not updated ============')
+            console.log(posts)
+
+            let copyPosts = posts.filter((post) => post.id !== id); /// filter posts without the obj to be updated
+            posts = [
+                ...copyPosts, /// spread the whole array
+                dataToUpdate, /// insert a new updated obj data
+            ]
+            console.log('===== post array after updated ============')
+            console.log(posts);
+
+            renderPosts();
+        })
 
 
     } catch (error) {
@@ -187,18 +234,32 @@ let renderPosts = () => {
         let postDiv = document.createElement("div");
         postDiv.className = 'post';
         postDiv.innerHTML = `
-         <div>
+         <div >
          <input id='${post?.id}' type='text' value='${post?.text}' disabled/>
-         <button class='update-btn' style='display:none;'>update</button>
+         <button type="button" class=' btn btn-danger update-btn' style='display:none;'>update</button>
          </div>
         <div id='btnBox-${post.id}'>  
-            <button class='del-btn'>delete</button>
-            <button class='edit-btn'>edit</button>
+            <button type="button" class="btn btn-primary del-btn" >delete</button>
+            <button type="button" class="btn btn-primary edit-btn" >edit</button>
         </div>
-            `
+
+        ${post?.timestamp ? `<span style='color:blue;'>updated</span>` : '<span></span>'}
+            
+        <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+        
+        `
 
         postDiv.querySelector('.del-btn').addEventListener('click', () => deletePost(post?.id))
         postDiv.querySelector('.edit-btn').addEventListener('click', () => editPost(post?.id))
+        postDiv.querySelector('.update-btn').addEventListener('click', () => updatePost(post?.id))
 
         postsMain.appendChild(postDiv)
     })
