@@ -2,11 +2,14 @@ import './App.css'
 import UserCard from './components/UserCard.jsx'
 import img1 from './assets/hero.png'
 import UserListItem from './components/UserListItem.jsx';
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
+import { fetchWeatherData } from './utilities.js';
 
 
 function App() {
+  let [count, setCount] = useState(0);
+  let [users, setUsers] = useState([]);
+  let [cityInput, setCityInput] = useState(null);
 
   let userDataLoaded = true;
   let usersData = [
@@ -30,13 +33,26 @@ function App() {
     'Subrahmanyan Chandrasekhar: astrophysicist'
   ];
 
+  // fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`)
+  // fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lan}&current_weather=true`)
 
-  // let count = 0;
 
-  let [count, setCount] = useState(0);
-  let [users, setUsers] = useState([]);
-  let [products, setProducts] = useState(null);
+  let fetchUsers = async () => {
+    try {
+      let response = await fetch('https://dummyjson.com/users');
+      response = await response.json();
+      setUsers(response.users)
+      console.log(response)
 
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
 
   return (
@@ -54,24 +70,42 @@ function App() {
 
         <button
           onClick={() => setCount(0)}
-
         >reset</button>
       </div>
 
+      <div
+        style={{
+          border: '2px solid black', padding: '10px',
+          margin: '10px'
+        }}>
+        <h1>Weather App</h1>
+
+        <div>
+          <input placeholder='enter city name' type="text" name="cityName" id="city-input"
+            onChange={(e) => setCityInput(e.target.value)}
+
+          />
+          <button onClick={async () => console.log(await fetchWeatherData(cityInput))}>search</button>
+        </div>
+      </div>
+
+
+
+
       {/* conditional rendering */}
       {
-        (userDataLoaded) ?
+        (users.length > 0) ?
           <>
-            <UserCard
-              bio={usersData[0].bio}
-              userName={usersData[0].user_name}
-              userProfile={usersData[0].profile}
-            />
-            <UserCard
-              bio={usersData[1].bio}
-              userName={usersData[1].user_name}
-              userProfile={usersData[1].profile}
-            />
+            {users?.map((user) => {
+              return (
+                <UserCard
+                  bio={user.email}
+                  userName={user.username}
+                  userProfile={user.image}
+                />
+              )
+            })}
+
 
             <div>
               <ul>
