@@ -44,6 +44,18 @@ const Navbar = () => {
                         to={'/auth/register'}>register
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink
+                        className={({ isActive }) => isActive ? "active" : ""}
+                        to={'/users'}>users
+                    </NavLink>
+                </li>
+                  <li>
+                    <NavLink
+                        className={({ isActive }) => isActive ? "active" : ""}
+                        to={'/user-search'}>user search
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     )
