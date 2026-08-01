@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ProductCard from '../../components/ProductCard'
 import { useNavigate } from 'react-router'
+import Navbar from '../../components/Navbar'
 
 const Products = () => {
   let [products, setProducts] = useState([])
@@ -29,6 +30,8 @@ const Products = () => {
   return (
 
     <>
+
+      <Navbar/>
 
       <div>
         {(products.length > 0) ?

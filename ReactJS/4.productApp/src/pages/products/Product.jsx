@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import axios from 'axios'
+import Navbar from '../../components/Navbar'
 
 const Product = () => {
     let [productData, setProductData] = useState(null)
@@ -28,7 +29,13 @@ const Product = () => {
 
 
     return (
-        (productData)?
+
+        
+      <>
+      <Navbar/>
+      
+      
+       { (productData)?
 
         <section className="text-gray-600 body-font overflow-hidden">
             <div className="container px-5 py-24 mx-auto">
@@ -109,8 +116,9 @@ const Product = () => {
             </div>
         </section>
         :
-        <h1>loading....</h1>
+        <h1>loading....</h1>}
 
+      </>
     )
 }
 
