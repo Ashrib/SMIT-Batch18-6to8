@@ -10,7 +10,7 @@ app.use('/users', userRoutes);
 app.use('/products', productsRoutes);
 
 
-app.get('/users', (req, res) => {
+app.get('/', (req, res) => {
     res.send('main path');
 });
 
