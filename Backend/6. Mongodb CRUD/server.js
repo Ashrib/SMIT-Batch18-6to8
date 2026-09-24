@@ -12,7 +12,7 @@ app.use(express.json())
 
 app.use('/users', usersRoutes);
 
-mongoose.connect('mongodb+srv://dbuser1:123mydb@cluster0.m20zxpk.mongodb.net/batch22')
+mongoose.connect('')
 .then(()=>{
     console.log('mongodb connected');
 }).catch((error)=>{
