@@ -2,20 +2,39 @@ import express from 'express'
 import User from '../Models/userModel.js';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import Joi from 'joi'
 
 const authRoutes = express.Router();
+
+const registerSchema = Joi.object({
+    email: Joi.string().email(),
+    password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'), 'enforces at least one uppercase letter, one lowercase letter, one digit, one special character, and a minimum length of 8!'),
+    username: Joi.string().min(3).max(15).message('username must be under 15 chars!'),
+    age: Joi.number().positive().min(15).max(90),
+})
+
+const loginSchema = Joi.object({
+    email: Joi.string().email(),
+    password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'), 'enforces at least one uppercase letter, one lowercase letter, one digit, one special character, and a minimum length of 8!'),
+})
+
 
 
 /// create user  ----- signup
 authRoutes.post('/register', async (req, res) => {
     try {
         let { email, username, password, age } = req.body;
+        console.log(req.body)
         if (!email || !username || !password || !age) {
             return res.status(400).json({
                 message: 'required all fields to create user.',
                 code: 400
             })
         }
+
+        // validate schema
+        const value = await registerSchema.validateAsync(req.body);
+        console.log(value)
 
         /// get user with the email (requested)
         let findUser = await User.findOne({ email: email });
@@ -49,25 +68,27 @@ authRoutes.post('/register', async (req, res) => {
         console.error(error);
 
         res.status(500).json({
-            message: 'error in creating user',
+            message: (error?.details[0].message)? error?.details[0].message : 'error in creating user',
             data: null,
             code: 500
         })
     }
 }
-
 )
+
 
 
 authRoutes.post('/login', async (req, res) => {
     try {
         let { email, password } = req.body;
-        if (!email || !password ) {
+        if (!email || !password) {
             return res.status(400).json({
                 message: 'required all email and password to login user.',
                 code: 400
             })
         }
+        let value = await loginSchema.validateAsync(req.body)
+
 
         /// get user with the email (requested)
         let findUser = await User.findOne({ email: email });
@@ -79,8 +100,8 @@ authRoutes.post('/login', async (req, res) => {
         }
 
         let checkPassword = await bcrypt.compare(password, findUser.password);
-        if(!checkPassword){
-             return res.status(400).json({
+        if (!checkPassword) {
+            return res.status(400).json({
                 message: 'invalid password!',
                 code: 400
             })
@@ -90,13 +111,13 @@ authRoutes.post('/login', async (req, res) => {
             message: 'successfull login.',
             code: 200,
         })
-        
+
     } catch (error) {
         console.error('error in login ')
         console.error(error);
 
         res.status(500).json({
-            message: 'error in login',
+            message: (error?.details[0].message)? error?.details[0].message : 'error in login',
             data: null,
             code: 500
         })
