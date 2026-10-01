@@ -3,6 +3,7 @@ import User from '../Models/userModel.js';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import Joi from 'joi'
+import jwt from 'jsonwebtoken';
 
 const authRoutes = express.Router();
 
@@ -50,17 +51,32 @@ authRoutes.post('/register', async (req, res) => {
         let hashPassword = await bcrypt.hash(password, saltRound);
         console.log(hashPassword)
 
+        let { password: userPass, ...userData } = req.body;
         /// create new user
+        let userId = new Date().getTime() + Math.floor(Math.random() * 10);
+
         let newUser = new User({
-            _id: new mongoose.Types.ObjectId(), ...req.body, password: hashPassword
+            _id: new mongoose.Types.ObjectId(), ...req.body, 
+            password: hashPassword, 
+            uid: userId
         }); // user obj
+        
+        /// create jwt
+        let token = jwt.sign({ uid: userId },
+             process.env.JWT_SCERET, 
+            // { algorithm: 'RS256' }
+        );
+        console.log(token);
+        
+        
         await newUser.save() /// save user in db 
 
-        let { password: userPass, ...userData } = req.body;
+
         res.json({
             message: 'created new user.',
             code: 200,
             data: userData,
+            token: token
         })
 
     } catch (error) {
@@ -68,7 +84,7 @@ authRoutes.post('/register', async (req, res) => {
         console.error(error);
 
         res.status(500).json({
-            message: (error?.details[0].message)? error?.details[0].message : 'error in creating user',
+            message: (error?.details[0].message) ? error?.details[0].message : 'error in creating user',
             data: null,
             code: 500
         })
@@ -107,9 +123,20 @@ authRoutes.post('/login', async (req, res) => {
             })
         }
 
+        // let { password: userPass, ...userData } = findUser;
+        console.log(findUser)
+
+        //   /// create jwt
+        // let token = jwt.sign({ ...userData },
+        //      process.env.JWT_SCERET, 
+        //     // { algorithm: 'RS256' }
+        // );
+        // console.log(token)
+
         res.json({
             message: 'successfull login.',
             code: 200,
+            // data: findUser
         })
 
     } catch (error) {
@@ -117,7 +144,7 @@ authRoutes.post('/login', async (req, res) => {
         console.error(error);
 
         res.status(500).json({
-            message: (error?.details[0].message)? error?.details[0].message : 'error in login',
+            message: (error?.details[0].message) ? error?.details[0].message : 'error in login',
             data: null,
             code: 500
         })
