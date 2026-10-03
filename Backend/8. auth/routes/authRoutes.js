@@ -29,7 +29,7 @@ authRoutes.post('/register', async (req, res) => {
         if (!email || !username || !password || !age) {
             return res.status(400).json({
                 message: 'required all fields to create user.',
-                code: 400
+                code: 400,
             })
         }
 
@@ -56,21 +56,22 @@ authRoutes.post('/register', async (req, res) => {
         let userId = new Date().getTime() + Math.floor(Math.random() * 10);
 
         let newUser = new User({
-            _id: new mongoose.Types.ObjectId(), ...req.body, 
-            password: hashPassword, 
+            _id: new mongoose.Types.ObjectId(), ...req.body,
+            password: hashPassword,
             uid: userId
         }); // user obj
-        
+
         /// create jwt
         let token = jwt.sign({ uid: userId },
-             process.env.JWT_SCERET, 
-            // { algorithm: 'RS256' }
+            process.env.JWT_SCERET,
+            {
+                // algorithm: 'RS256',
+                expiresIn: '1hr'
+            }
         );
         console.log(token);
-        
-        
-        await newUser.save() /// save user in db 
 
+        await newUser.save() /// save user in db 
 
         res.json({
             message: 'created new user.',
@@ -105,7 +106,6 @@ authRoutes.post('/login', async (req, res) => {
         }
         let value = await loginSchema.validateAsync(req.body)
 
-
         /// get user with the email (requested)
         let findUser = await User.findOne({ email: email });
         if (!findUser) {
@@ -126,17 +126,21 @@ authRoutes.post('/login', async (req, res) => {
         // let { password: userPass, ...userData } = findUser;
         console.log(findUser)
 
-        //   /// create jwt
-        // let token = jwt.sign({ ...userData },
-        //      process.env.JWT_SCERET, 
-        //     // { algorithm: 'RS256' }
-        // );
-        // console.log(token)
+        /// create jwt
+        let token = jwt.sign({ uid: findUser.uid },
+            process.env.JWT_SCERET,
+            {
+                // algorithm: 'RS256',
+                expiresIn: '1hr'
+            }
+        );
+        console.log(token)
 
         res.json({
             message: 'successfull login.',
             code: 200,
-            // data: findUser
+            data: findUser,
+            token: token
         })
 
     } catch (error) {

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dns from 'dns';
 import authRoutes from './routes/authRoutes.js';
 import "dotenv/config"
+import productsRoutes from './routes/productRoutes.js';
 
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
@@ -12,6 +13,7 @@ const port = 3000;
 app.use(express.json())
 
 app.use('/auth', authRoutes);
+app.use('/products', productsRoutes);
 
 mongoose.connect(process.env.MONGODB_URL)
 .then(()=>{
