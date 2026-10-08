@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
-import { Route, Routes } from 'react-router'
+import { Route, RouterContextProvider, Routes } from 'react-router'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import useAuthStore from './zustand/authStore.js'
+import AuthProtectedRoutes from './routes/AuthProtectedRoutes.jsx'
+import { Dashboard } from './pages/Dashboard.jsx'
 
 function App() {
 
-
+  let authUser = useAuthStore((state) => state.user);
+  console.log('Auth User:', authUser);
 
 
 
@@ -28,23 +31,26 @@ function App() {
   // }, [])
 
 
-
-  // useEffect(() => {
-
-  //   let authUser = useAuthStore((state) => state.user);
-  //   console.log('Auth User:', authUser); 
-
-  // }, [])
-
-
   return (
     <>
-    <Routes>
-      {/* auth routes */}
-      <Route path='/register' element={<Register />} />
-      <Route path='/login' element={<Login />} />
+      <Routes>
+        {/* auth routes */}
+        (!authUser) && (
 
-    </Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+
+        )
+
+
+        {/* protected routes */}
+        <Route element={<AuthProtectedRoutes />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/settings' element={<h2>Settings</h2>} />
+
+        </Route>
+
+      </Routes>
 
     </>
   )

@@ -5,6 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import useAuthStore from '../zustand/authStore'
+import { useNavigate } from 'react-router'
 
 
 const Register = () => {
@@ -39,6 +41,10 @@ const Register = () => {
 
     });
 
+    
+    let setAuthUser = useAuthStore((state) => state.setUser);
+    let navigate = useNavigate();
+
 
     let {
         handleSubmit,
@@ -56,8 +62,12 @@ const Register = () => {
             console.log(data)
             let backendUrl = import.meta.env.VITE_BACKEND_URL;
             const response = await axios.post(`${backendUrl}/auth/register`, data);
-            Cookies.set('token', response.token);
-            console.log(response.data);
+            Cookies.set('token', response.data.token);
+
+            /// store in zustand store
+            setAuthUser(response.data.data);
+
+            navigate('/dashboard');
         }
         catch (error) {
             console.error(error);
