@@ -24,8 +24,8 @@ const loginSchema = Joi.object({
 /// create user  ----- signup
 authRoutes.post('/register', async (req, res) => {
     try {
-        let { email, username, password, age } = req.body;
-        console.log(req.body)
+        let { email, username, password, age } = req?.body;
+        console.log(req?.body)
         if (!email || !username || !password || !age) {
             return res.status(400).json({
                 message: 'required all fields to create user.',
@@ -104,7 +104,7 @@ authRoutes.post('/login', async (req, res) => {
                 code: 400
             })
         }
-        let value = await loginSchema.validateAsync(req.body)
+        let value = await loginSchema.validateAsync(req.body);
 
         /// get user with the email (requested)
         let findUser = await User.findOne({ email: email });
@@ -136,10 +136,12 @@ authRoutes.post('/login', async (req, res) => {
         );
         console.log(token)
 
+        let { password: pass, ...userData } = findUser?._doc
+
         res.json({
             message: 'successfull login.',
             code: 200,
-            data: findUser,
+            data: userData,
             token: token
         })
 
@@ -158,9 +160,10 @@ authRoutes.post('/login', async (req, res) => {
 
 authRoutes.get('/getUser', async (req, res) => {
     try {
-        let token = req.headers.authorization.split(' ')[1]
+        let token = req?.headers?.authorization?.split(' ')?.[1] //// Bearer Token
 
-        console.log(token)
+        console.log(token);
+
         if (!token) { /// if no token
             res.status(403).json({
                 code: 403,
@@ -187,7 +190,7 @@ authRoutes.get('/getUser', async (req, res) => {
 
         if (decoded?.uid) {
             let findUser = await User.findOne({ uid: decoded?.uid });
-            let { password, ...userData } = findUser._doc;
+            let { password, ...userData } = findUser?._doc;
             return res.json({
                 code: 200,
                 message: "user found",

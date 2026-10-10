@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
-import { Route, RouterContextProvider, Routes } from 'react-router'
+import { Navigate, Route, RouterContextProvider, Routes } from 'react-router'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import useAuthStore from './zustand/authStore.js'
@@ -35,13 +35,13 @@ function App() {
     <>
       <Routes>
         {/* auth routes */}
-        (!authUser) && (
 
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-
-        )
-
+        <Route path='/login' element={
+          !authUser ?
+          <Login /> : <Navigate to={'/dashboard'} replace/>
+          } />
+        <Route path='/register' element={!authUser ?
+          <Register /> : <Navigate to={'/dashboard'} replace/>} />
 
         {/* protected routes */}
         <Route element={<AuthProtectedRoutes />}>
@@ -49,6 +49,17 @@ function App() {
           <Route path='/settings' element={<h2>Settings</h2>} />
 
         </Route>
+
+
+        {/* default routes */}
+
+          <Route path='*'
+          element={
+            <Navigate to={authUser? '/dashboard': '/login'} replace/>
+          }
+          />
+
+
 
       </Routes>
 

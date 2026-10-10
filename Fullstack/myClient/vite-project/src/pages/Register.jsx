@@ -62,10 +62,10 @@ const Register = () => {
             console.log(data)
             let backendUrl = import.meta.env.VITE_BACKEND_URL;
             const response = await axios.post(`${backendUrl}/auth/register`, data);
-            Cookies.set('token', response.data.token);
+            Cookies.set('token', response?.data?.token);
 
             /// store in zustand store
-            setAuthUser(response.data.data);
+            setAuthUser(response?.data?.data);
 
             navigate('/dashboard');
         }
