@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
     age: { type: Number, required: true },
     uid: { type: Number, required: true },
+    photoURL: { type: String || null  },
 },{
     timestamps: true
 })

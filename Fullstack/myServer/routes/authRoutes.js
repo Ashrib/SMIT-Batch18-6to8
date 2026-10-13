@@ -58,7 +58,8 @@ authRoutes.post('/register', async (req, res) => {
         let newUser = new User({
             _id: new mongoose.Types.ObjectId(), ...req.body,
             password: hashPassword,
-            uid: userId
+            uid: userId,
+            photoURL: null,
         }); // user obj
 
         /// create jwt

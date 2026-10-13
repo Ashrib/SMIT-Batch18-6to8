@@ -7,6 +7,7 @@ import Login from './pages/Login.jsx'
 import useAuthStore from './zustand/authStore.js'
 import AuthProtectedRoutes from './routes/AuthProtectedRoutes.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
+import { ProfilePic } from './pages/ProfilePic.jsx'
 
 function App() {
 
@@ -44,11 +45,12 @@ function App() {
           <Register /> : <Navigate to={'/dashboard'} replace/>} />
 
         {/* protected routes */}
-        <Route element={<AuthProtectedRoutes />}>
+        {/* <Route element={<AuthProtectedRoutes />}> */}
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/settings' element={<h2>Settings</h2>} />
+          <Route path='/profile-pic' element={<ProfilePic/>} />
 
-        </Route>
+        {/* </Route> */}
 
 
         {/* default routes */}

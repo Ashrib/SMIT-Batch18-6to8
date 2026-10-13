@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes.js';
 import "dotenv/config"
 import productsRoutes from './routes/productRoutes.js';
 import cors from 'cors';
+import usersRoutes from './routes/usersRoutes.js';
 
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
@@ -12,7 +13,7 @@ const app = express()
 const port = 3000;
 
 
-app.use(express.json())
+app.use(express.json());  /// json body parsing
 
 const corsOptions = {
     origin: 'http://localhost:5173', // Replace with your frontend URL
@@ -24,6 +25,7 @@ app.use(cors(corsOptions)); // Enable CORS for all routes
 
 app.use('/auth', authRoutes);
 app.use('/products', productsRoutes);
+app.use('/users', usersRoutes);
 
 
 
