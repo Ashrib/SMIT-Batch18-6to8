@@ -48,7 +48,7 @@ function App() {
         {/* <Route element={<AuthProtectedRoutes />}> */}
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/settings' element={<h2>Settings</h2>} />
-          <Route path='/profile-pic' element={<ProfilePic/>} />
+          <Route path='/profile-upload' element={<ProfilePic/>} />
 
         {/* </Route> */}
 

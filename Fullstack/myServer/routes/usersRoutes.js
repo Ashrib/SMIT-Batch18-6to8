@@ -2,11 +2,17 @@ import express from 'express'
 import User from '../Models/userModel.js';
 import mongoose from 'mongoose';
 import multer from 'multer';
+import { v2 as cloudinary } from 'cloudinary';
 
 const usersRoutes = express.Router();
 
-const storage = multer.diskStorage();  //// RAM for tempory hold
-const upload = multer({ storage: storage });   
+const storage = multer.diskStorage();  //// server RAM for tempory hold
+const upload = multer({ storage: storage });   /// middleware
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 
 
@@ -160,7 +166,7 @@ usersRoutes.delete('/:id', async (req, res) => {
 usersRoutes.put('/:id', async (req, res) => {
     try {
         let { id } = req.params;
-        
+
         let findUserExist = await User.findById(id);
         console.log(findUserExist)
         if (!findUserExist) {
@@ -196,13 +202,49 @@ usersRoutes.put('/:id', async (req, res) => {
 
 
 //// upload profile-image
-usersRoutes.post('/profile-upload/:uid', upload.single('profile_image'), (req,res)=>{
-    let {uid} = req.params
+usersRoutes.post('/profile-upload/:uid', upload.single('profile_image'), async (req, res) => {
+    try {
+        let { uid } = req.params;
 
-    console.log(req.file)
+        let fileToUpload = req.file;
+        console.log(fileToUpload);
 
+        //// uplaod to cloudinary
+        let cloudinaryResponse = await cloudinary.uploader.upload(fileToUpload.path, {
+            folder: 'batch18',
+            public_id: `profile-${uid}`
+        })
 
-    res.send('profile upload api working')
+        console.log(cloudinaryResponse.secure_url);
+        console.log('cloudinary success');
+
+        if (cloudinaryResponse.secure_url) {
+            /// store url in db
+            await User.findOneAndUpdate({ uid: uid }, {
+                photoURL: cloudinaryResponse?.secure_url || null
+            })
+
+            return res.json({
+                code: 200,
+                message: 'profile successfully uplaoded!',
+            })
+        }
+
+        return res.json({
+            code: 500,
+            message: "can't in uploading profile!",
+        })
+
+    } catch (error) {
+        console.log('error in cloudinary uplaod!')
+        console.log(error)
+        res.json({
+            code: 500,
+            message: 'error in uplaoding profile!',
+            error: error,
+        })
+    }
+
 })
 
 
