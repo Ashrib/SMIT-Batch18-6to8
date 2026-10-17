@@ -2,18 +2,12 @@ import express from 'express'
 import User from '../Models/userModel.js';
 import mongoose from 'mongoose';
 import multer from 'multer';
-import { v2 as cloudinary } from 'cloudinary';
+import cloudinary from '../config/cloudinaryConfig.js';
 
 const usersRoutes = express.Router();
 
 const storage = multer.diskStorage();  //// server RAM for tempory hold
 const upload = multer({ storage: storage });   /// middleware
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 
 
 usersRoutes.get('/', async (req, res) => {   ///get all users
@@ -212,7 +206,9 @@ usersRoutes.post('/profile-upload/:uid', upload.single('profile_image'), async (
         //// uplaod to cloudinary
         let cloudinaryResponse = await cloudinary.uploader.upload(fileToUpload.path, {
             folder: 'batch18',
-            public_id: `profile-${uid}`
+            public_id: `profile-${uid}`,
+            overwrite: true,
+            resource_type: 'image',
         })
 
         console.log(cloudinaryResponse.secure_url);
@@ -222,11 +218,11 @@ usersRoutes.post('/profile-upload/:uid', upload.single('profile_image'), async (
             /// store url in db
             await User.findOneAndUpdate({ uid: uid }, {
                 photoURL: cloudinaryResponse?.secure_url || null
-            })
-
-            return res.json({
-                code: 200,
-                message: 'profile successfully uplaoded!',
+            }).then(() => {
+                return res.json({
+                    code: 200,
+                    message: 'profile successfully uplaoded!',
+                })
             })
         }
 
@@ -247,8 +243,67 @@ usersRoutes.post('/profile-upload/:uid', upload.single('profile_image'), async (
 
 })
 
+//// delete profile-image
+usersRoutes.delete('/profile-delete/:uid', async (req, res) => {
+    try {
+        let { uid } = req.params;
+
+        /// get user with the uid (requested)
+        let findUser = await User.findOne({ uid: uid });
+        if (!findUser) {
+            return res.status(404).json({
+                message: 'cannot find user with this id!',
+                data: null,
+                code: 404
+            });
+        }
+
+        if (!findUser.photoURL) {
+            return res.status(402).json({
+                message: 'this user doesnot have profile!',
+                code: 402
+            });
+        }
+
+        //// delete from cloudinary
+        let cloudinaryResponse = await cloudinary.uploader.destroy(`batch18/profile-${uid}`,
+            { invalidate: true },
+        )
+
+        if (cloudinaryResponse.result != 'ok' && cloudinaryResponse.result == 'not found') {
+            return res.status(404).json({
+                message: 'cloudinary not found, unable to delete the profile!',
+                code: 404
+            })
+        }
+
+        /// update photoURl in db
+        await User.findOneAndUpdate({ uid: uid }, {
+            photoURL: null
+        }).then(() => {
+            return res.json({
+                code: 200,
+                message: 'profile successfully deleted!',
+            })
+        })
+
+        return res.json({
+            code: 200,
+            message: 'profile delete route!',
+        })
+
+    } catch (error) {
+        console.log('error in cloudinary uplaod!')
+        console.log(error)
+        res.json({
+            code: 500,
+            message: 'error in uplaoding profile!',
+            error: error,
+        })
+    }
+
+})
 
 
 
 export default usersRoutes;
-
