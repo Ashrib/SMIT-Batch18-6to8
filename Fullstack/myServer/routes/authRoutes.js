@@ -12,7 +12,7 @@ const registerSchema = Joi.object({
     password: Joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'), 'enforces at least one uppercase letter, one lowercase letter, one digit, one special character, and a minimum length of 8!'),
     username: Joi.string().min(3).max(15).message('username must be under 15 chars!'),
     age: Joi.number().positive().min(15).max(90),
-})
+});
 
 const loginSchema = Joi.object({
     email: Joi.string().email(),
