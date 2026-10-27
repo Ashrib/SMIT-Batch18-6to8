@@ -8,6 +8,7 @@ import useAuthStore from './zustand/authStore.js'
 import AuthProtectedRoutes from './routes/AuthProtectedRoutes.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { ProfilePic } from './pages/ProfilePic.jsx'
+import Chat from './pages/Chat.jsx'
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
         {/* <Route element={<AuthProtectedRoutes />}> */}
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/settings' element={<h2>Settings</h2>} />
+          <Route path='/chat' element={<Chat />} />
           <Route path='/profile-upload' element={<ProfilePic/>} />
 
         {/* </Route> */}
