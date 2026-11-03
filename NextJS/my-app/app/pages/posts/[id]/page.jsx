@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export default async function Post({ params }) {
+export async function Post({ params }) {
 
   let { id } = await params;
 
@@ -10,7 +10,7 @@ export default async function Post({ params }) {
 
   return (
     <div>
-      <h2>
+       <h2>
 
         Single Post page
       </h2>
