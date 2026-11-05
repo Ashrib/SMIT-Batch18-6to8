@@ -1,13 +1,40 @@
 import { NextResponse } from "next/server"
+import { redis } from "@/app/lib/redis/redis"
 
-export async function GET() {
-    let users = [
-        {username: 'user1'},
-        {username: 'user2'},
-        {username: 'user3'},
-    ]
+let users = [
+    { username: 'user1' },
+    { username: 'user2' },
+    { username: 'user3' },
+]
 
-    console.log('users api')
+
+
+export async function GET() {  /// all users
+
+    console.log('users api');
+
+    let cacheUsers = await redis.get("users:all");
+
+    console.log(cacheUsers)
+
+    if (cacheUsers) {
+
+        console.log("cache hit !")
+
+        return NextResponse.json({
+            message: 'getting all users',
+            data: JSON.parse(cacheUsers)
+        })
+    }
+
+
+    //// getting data from db
+
+
+    redis.set("users:all", JSON.stringify(users), "EX", 10)
+        console.log("cache miss !")
+
+
 
     return NextResponse.json({
         message: 'getting all users',
