@@ -1,20 +1,20 @@
-import axios from "axios";
+// import axios from "axios";
 
 
-export async function Post({ params }) {
+// export async function Post({ params }) {
 
-  let { id } = await params;
+//   let { id } = await params;
 
-  let response = await axios.get(`https://dummyjson.com/posts/${id}`);
-  console.log(response.data)
+//   let response = await axios.get(`https://dummyjson.com/posts/${id}`);
+//   console.log(response.data)
 
-  return (
-    <div>
-       <h2>
+//   return (
+//     <div>
+//        <h2>
 
-        Single Post page
-      </h2>
+//         Single Post page
+//       </h2>
 
-    </div>
-  );
-}
+//     </div>
+//   );
+// }
