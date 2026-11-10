@@ -22,5 +22,7 @@ export async function getUsers() {
 
 
 
+  // revalidatePath('/users')
+
   return users.users
 }
