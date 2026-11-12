@@ -1,4 +1,9 @@
-// import { NextResponse } from "next/server"
+import dbConnect from "@/app/lib/db"
+import { NextResponse } from "next/server"
+import User from "@/app/lib/models/Users";
+
+
+
 // import { redis } from "@/app/lib/redis/redis"
 
 // let users = [
@@ -48,3 +53,44 @@
 // // export async function POST() {
 // // }
 
+
+export async function GET() {
+  try {
+    await dbConnect();
+
+    const users = await User.find();
+
+    console.log(users)
+
+    if (users && users.length > 0) {
+      return NextResponse.json(
+        {
+          message: "getting all users from db",
+          users: users,
+        },
+        { status: 200 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        message: "couldn't find users",
+        users: [],
+      },
+      { status: 404 }
+    );
+  } catch (error) {
+    console.error(error);
+
+    // 1. Added 'return' before NextResponse.json
+    // 2. Passed 'error.message' instead of the raw 'error' object
+    // 3. Added { status: 500 } so the client knows it failed
+    return NextResponse.json(
+      {
+        message: "error in finding users",
+        error: error.message,
+      },
+      { status: 500 }
+    );
+  }
+}
