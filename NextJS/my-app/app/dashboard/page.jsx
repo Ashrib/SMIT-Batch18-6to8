@@ -1,23 +1,6 @@
-"use client"
 
-import axios from "axios";
-import { useEffect } from "react";
+export default async function Dashboard() {
 
-export default function Dashboard() {
-
-  useEffect(() => {
-    (async () => {
-      try {
-
-        let response = await axios.get('/api/users/1');
-        console.log(response)
-
-      } catch (error) {
-        console.error(error)
-      }
-    })();
-
-  }, [])
 
 
 
@@ -27,6 +10,9 @@ export default function Dashboard() {
 
         Dashboard page
       </h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam nisi ad perferendis minima saepe unde neque dicta repudiandae quae pariatur! Maiores ab possimus alias numquam libero? Iste velit repellat deserunt?
+      </p>
 
     </div>
   );
